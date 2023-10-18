@@ -1,5 +1,6 @@
 package com.example.server.controller;
 
+import com.example.server.dto.GenericResponse;
 import com.example.server.dto.HealthCheckResponse;
 import com.example.server.seminar.Person;
 import org.springframework.http.ResponseEntity;
@@ -47,5 +48,10 @@ public class HealthCheckController {
     @GetMapping("/v5")
     public ResponseEntity<HealthCheckResponse> healthCheckV5() {
         return ResponseEntity.ok(new HealthCheckResponse());
+    }
+
+    @GetMapping("/v6")
+    public GenericResponse<?> healthCheckV6() {
+        return new GenericResponse<>(200, "OK", true);
     }
 }

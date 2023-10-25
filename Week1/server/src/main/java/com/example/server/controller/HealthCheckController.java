@@ -2,7 +2,9 @@ package com.example.server.controller;
 
 import com.example.server.dto.GenericResponse;
 import com.example.server.dto.HealthCheckResponse;
+import com.example.server.dto.StatusCode;
 import com.example.server.seminar.Person;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -52,6 +54,6 @@ public class HealthCheckController {
 
     @GetMapping("/v6")
     public GenericResponse<?> healthCheckV6() {
-        return new GenericResponse<>(200, "OK", true);
+        return new GenericResponse<>(StatusCode.OK.getStatusCode(), "OK", true);
     }
 }

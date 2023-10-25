@@ -4,6 +4,7 @@ import com.example.server.domain.Member;
 import com.example.server.dto.GenericResponse;
 import com.example.server.dto.MemberCreateRequest;
 import com.example.server.dto.MemberGetResponse;
+import com.example.server.dto.StatusCode;
 import com.example.server.service.MemberService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
@@ -21,32 +22,32 @@ public class MemberController {
 
     @GetMapping("/{memberId}")
     public GenericResponse<MemberGetResponse> getMemberProfileV1(@PathVariable("memberId") Long memberId) {
-        return new GenericResponse<MemberGetResponse>(200, "사용자를 조회했습니다.", true,  memberService.getByIdV1(memberId));
+        return new GenericResponse<MemberGetResponse>(StatusCode.OK.getStatusCode(), "사용자를 조회했습니다.", true,  memberService.getByIdV1(memberId));
     }
 
     @GetMapping(value = "/{memberId}/v2", produces = MediaType.APPLICATION_JSON_VALUE)
     public  GenericResponse<MemberGetResponse> getMemberProfileV2(@PathVariable Long memberId) {
-        return new GenericResponse<MemberGetResponse>(200, "사용자를 조회했습니다.", true, memberService.getByIdV2(memberId));
+        return new GenericResponse<MemberGetResponse>(StatusCode.OK.getStatusCode(), "사용자를 조회했습니다.", true, memberService.getByIdV2(memberId));
     }
 
     @GetMapping
     public GenericResponse<List<MemberGetResponse>> getMembersProfile() {
-        return new GenericResponse<List<MemberGetResponse>>(200, "사용자 전체 목록을 조회했습니다.", true, memberService.getMembers());
+        return new GenericResponse<List<MemberGetResponse>>(StatusCode.OK.getStatusCode(), "사용자 전체 목록을 조회했습니다.", true, memberService.getMembers());
     }
 
     @PostMapping
     public GenericResponse<Member> createMember(@RequestBody MemberCreateRequest request) {
         Member newMember = memberService.create(request);
-        return new GenericResponse<Member>(200, "사용자를 생성하였습니다.", true, newMember);
+        return new GenericResponse<Member>(StatusCode.CREATED.getStatusCode(), "사용자를 생성하였습니다.", true, newMember);
     }
     @DeleteMapping("/{memberId}")
     public GenericResponse<MemberGetResponse> deleteMember(@PathVariable("memberId") Long memberId) {
         memberService.delete(memberId);
-        return new GenericResponse<MemberGetResponse>(200, "사용자를 삭제하였습니다.", true);
+        return new GenericResponse<MemberGetResponse>(StatusCode.NO_CONTENT.getStatusCode(), "사용자를 삭제하였습니다.", true);
     }
 
     @PatchMapping("/{memberId}")
     public GenericResponse<Member> updateMember(@RequestBody MemberCreateRequest request, @PathVariable("memberId") Long memberId) {
-        return new GenericResponse<Member>(200, "사용자 정보를 수정하였습니다.", true, memberService.update(request, memberId));
+        return new GenericResponse<Member>(StatusCode.OK.getStatusCode(), "사용자 정보를 수정하였습니다.", true, memberService.update(request, memberId));
     }
 }

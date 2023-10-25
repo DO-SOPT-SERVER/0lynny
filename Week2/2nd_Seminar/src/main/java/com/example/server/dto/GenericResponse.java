@@ -6,7 +6,6 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 @Getter
-@AllArgsConstructor
 @JsonPropertyOrder({"code", "status", "success", "data"})
 public class GenericResponse<T> {
     private final int code;
@@ -19,5 +18,12 @@ public class GenericResponse<T> {
         this.code = code;
         this.status = status;
         this.success = success;
+    }
+
+    public GenericResponse(int code, String status, Boolean success, T data) {
+        this.code = code;
+        this.status = status;
+        this.success = success;
+        this.data = data;
     }
 }

@@ -39,4 +39,14 @@ public class MemberController {
         Member newMember = memberService.create(request);
         return new GenericResponse<Member>(200, "사용자를 생성하였습니다.", true, newMember);
     }
+    @DeleteMapping("/{memberId}")
+    public GenericResponse<MemberGetResponse> deleteMember(@PathVariable("memberId") Long memberId) {
+        memberService.delete(memberId);
+        return new GenericResponse<MemberGetResponse>(200, "사용자를 삭제하였습니다.", true);
+    }
+
+    @PatchMapping("/{memberId}")
+    public GenericResponse<Member> updateMember(@RequestBody MemberCreateRequest request, @PathVariable("memberId") Long memberId) {
+        return new GenericResponse<Member>(200, "사용자 정보를 수정하였습니다.", true, memberService.update(request, memberId));
+    }
 }

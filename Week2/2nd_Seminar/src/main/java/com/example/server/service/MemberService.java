@@ -48,6 +48,22 @@ public class MemberService {
         return memberJpaRepository.save(member);
     }
 
+    @Transactional
+    public void delete(Long memberId) {
+        Member member = memberJpaRepository.findByIdOrThrow(memberId);
+        memberJpaRepository.delete(member);
+    }
+
+    @Transactional
+    public Member update(MemberCreateRequest request, Long memberId) {
+        Member member = memberJpaRepository.findByIdOrThrow(memberId);
+        member.setName(request.name());
+        member.setNickName(request.nickname());
+        member.setAge(request.age());
+        member.setSopt(request.sopt());
+        return memberJpaRepository.save(member);
+    }
+
     private  Member findById(Long memberId) {
         return memberJpaRepository.findById(memberId).orElseThrow(
                 () -> new EntityNotFoundException("존재하는 회원이 없습니다")

@@ -38,16 +38,16 @@ public class MemberService {
     }
 
     @Transactional
-    public String create(MemberCreateRequest request) {
+    public Member create(MemberCreateRequest request) {
         Member member = Member.builder()
                 .name(request.name())
                 .nickName(request.nickname())
                 .age(request.age())
                 .sopt(request.sopt())
                 .build();
-        return memberJpaRepository.save(member).getId().toString();
+        return memberJpaRepository.save(member);
     }
-    
+
     private  Member findById(Long memberId) {
         return memberJpaRepository.findById(memberId).orElseThrow(
                 () -> new EntityNotFoundException("존재하는 회원이 없습니다")

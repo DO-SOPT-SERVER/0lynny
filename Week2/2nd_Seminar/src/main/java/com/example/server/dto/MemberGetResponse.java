@@ -5,14 +5,12 @@ import com.example.server.domain.SOPT;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
-@Data
-@AllArgsConstructor
-public class MemberGetResponse {
-    private String name;
-    private String nickname;
-    private int age;
-    private SOPT sopt;
-
+public record MemberGetResponse(
+        String name,
+        String nickname,
+        int age,
+        SOPT sopt
+) {
     public static MemberGetResponse of(Member member) {
         return new MemberGetResponse(
                 member.getName(),

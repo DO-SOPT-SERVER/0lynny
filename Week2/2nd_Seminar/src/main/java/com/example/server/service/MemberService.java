@@ -9,7 +9,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.net.URI;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -38,7 +37,7 @@ public class MemberService {
     }
 
     @Transactional
-    public Member create(MemberCreateRequest request) {
+    public Member createMember(MemberCreateRequest request) {
         Member member = Member.builder()
                 .name(request.name())
                 .nickName(request.nickname())
@@ -49,13 +48,13 @@ public class MemberService {
     }
 
     @Transactional
-    public void delete(Long memberId) {
+    public void deleteMember(Long memberId) {
         Member member = memberJpaRepository.findByIdOrThrow(memberId);
         memberJpaRepository.delete(member);
     }
 
     @Transactional
-    public Member update(MemberCreateRequest request, Long memberId) {
+    public Member updateMember(MemberCreateRequest request, Long memberId) {
         Member member = memberJpaRepository.findByIdOrThrow(memberId);
         member.setName(request.name());
         member.setNickName(request.nickname());

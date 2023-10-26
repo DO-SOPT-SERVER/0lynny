@@ -1,4 +1,4 @@
-package com.example.server.dto;
+package com.example.server.dto.request;
 
 import com.example.server.domain.SOPT;
 import lombok.Data;

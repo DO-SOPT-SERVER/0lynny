@@ -1,4 +1,4 @@
-package com.example.server.dto;
+package com.example.server.common;
 
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;

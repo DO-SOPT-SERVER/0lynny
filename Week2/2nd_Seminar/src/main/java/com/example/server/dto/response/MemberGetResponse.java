@@ -1,9 +1,7 @@
-package com.example.server.dto;
+package com.example.server.dto.response;
 
 import com.example.server.domain.Member;
 import com.example.server.domain.SOPT;
-import lombok.AllArgsConstructor;
-import lombok.Data;
 
 public record MemberGetResponse(
         String name,

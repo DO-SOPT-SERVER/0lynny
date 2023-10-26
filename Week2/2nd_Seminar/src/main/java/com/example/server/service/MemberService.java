@@ -1,8 +1,8 @@
 package com.example.server.service;
 
 import com.example.server.domain.Member;
-import com.example.server.dto.MemberCreateRequest;
-import com.example.server.dto.MemberGetResponse;
+import com.example.server.dto.request.MemberCreateRequest;
+import com.example.server.dto.response.MemberGetResponse;
 import com.example.server.repository.MemberJpaRepository;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;

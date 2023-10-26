@@ -1,7 +1,6 @@
 package com.example.server.repository;
 
 import com.example.server.domain.Member;
-import com.example.server.dto.MemberGetResponse;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.data.jpa.repository.JpaRepository;
 

@@ -1,10 +1,10 @@
 package com.example.server.controller;
 
 import com.example.server.domain.Member;
-import com.example.server.dto.GenericResponse;
-import com.example.server.dto.MemberCreateRequest;
-import com.example.server.dto.MemberGetResponse;
-import com.example.server.dto.StatusCode;
+import com.example.server.common.GenericResponse;
+import com.example.server.dto.request.MemberCreateRequest;
+import com.example.server.dto.response.MemberGetResponse;
+import com.example.server.common.StatusCode;
 import com.example.server.service.MemberService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;

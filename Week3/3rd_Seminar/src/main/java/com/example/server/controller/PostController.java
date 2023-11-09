@@ -1,5 +1,6 @@
 package com.example.server.controller;
 
+import com.example.server.domain.Category;
 import com.example.server.dto.post.PostCreateRequest;
 import com.example.server.dto.post.PostGetResponse;
 import com.example.server.dto.post.PostUpdateRequest;

@@ -1,5 +1,6 @@
 package com.example.server.service;
 
+import com.example.server.domain.Category;
 import com.example.server.domain.Member;
 import com.example.server.domain.Post;
 import com.example.server.dto.post.PostCreateRequest;
@@ -20,6 +21,7 @@ import java.util.List;
 public class PostService {
     private final PostJpaRepository postJpaRepository;
     private final MemberJpaRepository memberJpaRepository;
+    private final CategoryService categoryService;
 
     @Transactional
     public String create(PostCreateRequest request, Long memberId) {
@@ -35,13 +37,13 @@ public class PostService {
 
     public PostGetResponse getById(Long postId) {
         Post post = postJpaRepository.findById(postId).orElseThrow(() -> new EntityNotFoundException("해당하는 게시글이 없습니다."));
-        return  PostGetResponse.of(post);
+        return  PostGetResponse.of(post, getCategoryByPost(post));
     }
 
     public List<PostGetResponse> getPosts(Long memberId) {
         return postJpaRepository.findAllByMemberId(memberId)
                 .stream()
-                .map(post -> PostGetResponse.of(post))
+                .map(post -> PostGetResponse.of(post, getCategoryByPost(post)))
                 .toList();
     }
 
@@ -55,5 +57,9 @@ public class PostService {
     public void deleteById(Long postId) {
         Post post = postJpaRepository.findById(postId).orElseThrow(() -> new EntityNotFoundException("해당하는 게시글이 없습니다."));
         postJpaRepository.delete(post);
+    }
+
+    private Category getCategoryByPost(Post post) {
+        return categoryService.getCategoryById(post.getCategoryId());
     }
 }

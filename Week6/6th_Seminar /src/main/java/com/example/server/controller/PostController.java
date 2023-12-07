@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
+import java.security.Principal;
 import java.util.List;
 
 @RestController
@@ -31,9 +32,19 @@ public class PostController {
         return ResponseEntity.ok(postService.getPosts(memberId));
     }
 
+    //    @PostMapping
+//    public ResponseEntity<Void> createPost(@RequestHeader(CUSTOM_AUTH_ID) Long memberId, @RequestBody PostCreateRequest request) {
+//        URI location = URI.create("/api/post/" + postService.create(request, memberId));
+//        return ResponseEntity.created(location).build();
+//    }
     @PostMapping
-    public ResponseEntity<Void> createPost(@RequestHeader(CUSTOM_AUTH_ID) Long memberId, @RequestBody PostCreateRequest request) {
-        URI location = URI.create("/api/post/" + postService.create(request, memberId));
+    public ResponseEntity<Void> createPost(
+            @RequestBody PostCreateRequest request,
+            Principal principal) {
+
+        Long memberId = Long.valueOf(principal.getName());
+        URI location = URI.create("/api/posts/" + postService.create(request, memberId));
+
         return ResponseEntity.created(location).build();
     }
 

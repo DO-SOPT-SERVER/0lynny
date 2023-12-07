@@ -28,12 +28,19 @@ public class Post extends BaseTimeEntity {
     @Column(name = "category_id")
     private CategoryId categoryId;
 
-    @Builder
+    @Builder(builderMethodName = "builderWithImageUrl")
     public Post(String title, String content, String imageUrl, Member member) {
         this.title = title;
         this.content = content;
-        this.member = member;
         this.imageUrl = imageUrl;
+        this.member = member;
+    }
+
+    @Builder
+    public Post(String title, String content, Member member) {
+        this.title = title;
+        this.content = content;
+        this.member = member;
     }
 
     public void updateContent(String content) {

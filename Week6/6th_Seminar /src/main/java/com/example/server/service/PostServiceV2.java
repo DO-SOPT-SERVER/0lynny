@@ -42,7 +42,7 @@ public class PostServiceV2 {
             String imageUrl = s3Service.uploadImage(POST_IMAGE_FOLDER_NAME, image);
             Member member = memberJpaRepository.findByIdOrThrow(memberId);
             Post post = postJpaRepository.save(
-                    Post.builder()
+                    Post.builderWithImageUrl()
                     .title(request.title())
                     .content(request.content())
                     .imageUrl(imageUrl)
